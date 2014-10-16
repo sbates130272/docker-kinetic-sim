@@ -20,8 +20,11 @@ RUN apt-get install -y openjdk-7-jdk
 RUN apt-get install -y openjdk-7-jre
 RUN apt-get install -y maven
 RUN git clone https://github.com/Seagate/kinetic-java.git kinetic-java
-RUN export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 && \
-           echo "export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> ~/.bashrc
+
+# Now set JAVA_HOME using the ENV command and build the simulator
+# using maven. Note the cd and mvn must be on the same line to ensure
+# maven runs in the right folder.
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 RUN cd kinetic-java && mvn clean package
 
 # The simulator runs on port 8123 by default so we expose that
@@ -29,7 +32,7 @@ RUN cd kinetic-java && mvn clean package
 EXPOSE 8123
 
 # Define the default entry point to this container to be the kinetic
-# simulator start script. This can be over-ridden by the docker run
-# command.
+# simulator start script. This forces this container to only be a
+# kinetic simulator.
 CMD [""]
 ENTRYPOINT ["/root/kinetic-java/bin/startSimulator.sh"]
