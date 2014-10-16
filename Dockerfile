@@ -31,4 +31,4 @@ EXPOSE 8123
 # simulator start script. This can be over-ridden by the docker run
 # command.
 CMD [""]
-ENTRYPOINT ["/kinetic-java/kinetic-simulator/bin/startSimulator.sh"]
+ENTRYPOINT ["/root/kinetic-java/kinetic-simulator/bin/startSimulator.sh"]
