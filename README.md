@@ -20,3 +20,4 @@ This repository contains **Dockerfile** of [seagate/kinetic-java](https://github
 
 ### Usage
 
+I recommend you deploy containers based on this image using `docker run` with the `-d -p` options. This runs the containers in the background and then maps from the default port to a free port on the host device. The use `docker ps` to locate the exposed ports and connect to the containers via those ports.
