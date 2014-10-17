@@ -23,8 +23,12 @@ RUN git clone https://github.com/Seagate/kinetic-java.git kinetic-java
 
 # Now set JAVA_HOME using the ENV command and build the simulator
 # using maven. Note the cd and mvn must be on the same line to ensure
-# maven runs in the right folder.
+# maven runs in the right folder. Note the export command is needed to
+# make the autobuild work (not needed for local builds). I am not sure
+# why this is (yet).
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+RUN export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 && \
+           echo "export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> ~/.bashrc
 RUN cd kinetic-java && mvn clean package
 
 # The simulator runs on port 8123 by default so we expose that
